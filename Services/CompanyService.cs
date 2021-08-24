@@ -1,4 +1,5 @@
-﻿using DividendScanner.Domain.Model;
+﻿using DividendScanner.Domain.Communications;
+using DividendScanner.Domain.Model;
 using DividendScanner.Domain.Repositories;
 using DividendScanner.Domain.Services;
 using System;
@@ -19,6 +20,23 @@ namespace DividendScanner.Services
         public async Task<IEnumerable<Company>> ListAsync()
         {
             return await _companyRepository.ListAsync();
+        }
+
+        public async Task<CompanyResponse> SaveAsync(Company company)
+        {
+            CompanyResponse response;
+            try
+            {
+                await _companyRepository.AddAsync(company);
+                response = new CompanyResponse(company);
+
+            }
+            catch(Exception ex)
+            {
+                response = new CompanyResponse($"An error occured during saving a category: {ex.Message}");
+            }
+            
+            return response;
         }
     }
 }

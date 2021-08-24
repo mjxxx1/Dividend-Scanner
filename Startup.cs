@@ -37,7 +37,8 @@ namespace DividendScanner
             services.AddControllers();
 
             services.AddScoped<ICompanyRepository, CompanyRepository>();
-            services.AddScoped<ICompanyService, CompanyService>();    
+            services.AddScoped<ICompanyService, CompanyService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

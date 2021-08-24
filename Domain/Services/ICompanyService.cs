@@ -1,4 +1,5 @@
-﻿using DividendScanner.Domain.Model;
+﻿using DividendScanner.Domain.Communications;
+using DividendScanner.Domain.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace DividendScanner.Domain.Services
     public interface ICompanyService
     {
         Task<IEnumerable<Company>> ListAsync();
+        Task<CompanyResponse> SaveAsync(Company company);
     }
 }

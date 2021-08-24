@@ -12,9 +12,16 @@ namespace DividendScanner.Persistence.Repositories
 {
     public class CompanyRepository : BaseRepository, ICompanyRepository
     {
-        public CompanyRepository(AppDbContext dbContext) : base(dbContext)
+        private readonly IUnitOfWork _unitOfWork;
+        public CompanyRepository(AppDbContext dbContext, IUnitOfWork unitOfWork) : base(dbContext)
         {
+            _unitOfWork = unitOfWork;
+        }
 
+        public async Task AddAsync(Company company)
+        {
+            await _appDbContext.Companies.AddAsync(company);
+            await _appDbContext.SaveChangesAsync();
         }
 
         async Task<IEnumerable<Company>> ICompanyRepository.ListAsync()

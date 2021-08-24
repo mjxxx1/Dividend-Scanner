@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DividendScanner.Domain.Model;
 using DividendScanner.Domain.Repositories;
 using DividendScanner.Domain.Services;
+using DividendScanner.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DividendScanner.Controllers
@@ -12,18 +13,36 @@ namespace DividendScanner.Controllers
     [Route("/api/[controller]")]
     public class CompaniesController : Controller
     {
-        private readonly ICompanyRepository _companiesService;
+        private readonly ICompanyService _companyService;
 
-        public CompaniesController(ICompanyRepository companiesService)
+        public CompaniesController(ICompanyService companyService)
         {
-            _companiesService = companiesService;
+            _companyService = companyService;
         }
 
         [HttpGet]
         public async Task<IEnumerable<Company>> GetAllAsync()
         {
-            var companies = await _companiesService.ListAsync();
+            var companies = await _companyService.ListAsync();
             return companies;
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> PostAsync([FromBody] Company company)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.GetErrorMessages());
+            }
+
+            var result = await _companyService.SaveAsync(company);
+
+            if (!result._success)
+                return BadRequest(result._message);
+
+            return Ok(result);
         }
     }
 }
