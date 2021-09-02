@@ -11,5 +11,6 @@ namespace DividendScanner.Domain.Services
     {
         Task<IEnumerable<Company>> ListAsync();
         Task<CompanyResponse> SaveAsync(Company company);
+        Task<CompanyResponse> UpdateAsync(string isin, Company company);
     }
 }

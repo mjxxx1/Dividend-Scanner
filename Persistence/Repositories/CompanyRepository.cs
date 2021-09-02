@@ -12,10 +12,8 @@ namespace DividendScanner.Persistence.Repositories
 {
     public class CompanyRepository : BaseRepository, ICompanyRepository
     {
-        private readonly IUnitOfWork _unitOfWork;
-        public CompanyRepository(AppDbContext dbContext, IUnitOfWork unitOfWork) : base(dbContext)
-        {
-            _unitOfWork = unitOfWork;
+        public CompanyRepository(AppDbContext dbContext) : base(dbContext)
+        { 
         }
 
         public async Task AddAsync(Company company)
@@ -24,9 +22,19 @@ namespace DividendScanner.Persistence.Repositories
             await _appDbContext.SaveChangesAsync();
         }
 
-        async Task<IEnumerable<Company>> ICompanyRepository.ListAsync()
+        public async Task<IEnumerable<Company>> ListAsync()
         {
-            return await _appDbContext.Companies.ToListAsync();
+            return await _appDbContext.Companies.Where(x => x.IsDeleted == false).ToListAsync();
+        }
+
+        public async Task<Company> FindCompanyByISINAsync(string isin)
+        {
+            return await _appDbContext.Companies.FindAsync(isin);
+        }
+
+        public void Update(Company company)
+        {
+            _appDbContext.Companies.Update(company);
         }
     }
 }
