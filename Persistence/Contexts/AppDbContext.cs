@@ -13,16 +13,11 @@ namespace DividendScanner.Persistence.Contexts
 
         public DbSet<Company> Companies { get; set; }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer(@"Server=MARIUSZ-PC\\SQLEXPRESS; Database=DividendScannerDB;Trusted_Connection=True; ");
-        //}
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Property Configurations
             modelBuilder.Entity<Company>()
-                    .HasKey(x => x.ISIN);
+                    .HasKey(x => x.ID);
 
             modelBuilder.Entity<Company>()
                     .Property(x => x.ISIN)
@@ -31,7 +26,7 @@ namespace DividendScanner.Persistence.Contexts
 
             modelBuilder.Entity<Company>()
                     .Property(x => x.Ticker)
-                    .HasMaxLength(3)
+                    .HasMaxLength(4)
                     .IsRequired();
 
             modelBuilder.Entity<Company>()
@@ -41,7 +36,7 @@ namespace DividendScanner.Persistence.Contexts
 
             modelBuilder.Entity<Company>()
                     .Property(x => x.IsDeleted)
-                    .IsRequired();
+                    .HasDefaultValue(false);
 
         }
     }

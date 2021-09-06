@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using DividendScanner.Domain.Model;
 using DividendScanner.Domain.Repositories;
 using DividendScanner.Domain.Services;
 using DividendScanner.Extensions;
+using DividendScanner.Resources;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DividendScanner.Controllers
@@ -14,17 +16,20 @@ namespace DividendScanner.Controllers
     public class CompaniesController : Controller
     {
         private readonly ICompanyService _companyService;
+        private readonly IMapper _mapper;
 
-        public CompaniesController(ICompanyService companyService)
+        public CompaniesController(ICompanyService companyService, IMapper mapper)
         {
             _companyService = companyService;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Company>> GetAllAsync()
+        public async Task<IEnumerable<CompanyResource>> GetAllAsync()
         {
             var companies = await _companyService.ListAsync();
-            return companies;
+            var resource = _mapper.Map<IEnumerable<Company>, IEnumerable<CompanyResource>>(companies);
+            return resource;
         }
 
 
