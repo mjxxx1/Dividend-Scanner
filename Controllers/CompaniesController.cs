@@ -51,20 +51,21 @@ namespace DividendScanner.Controllers
             return Ok(result);
         }
 
-        [HttpPut("{isin}")]
-        public async Task<IActionResult> PutAsync(string isin, [FromBody] Company company)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutAsync(int id, [FromBody] Company company)
         {
             if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState.GetErrorMessages());
             }
 
-            var result = await _companyService.UpdateAsync(isin, company);
+            var result = await _companyService.UpdateAsync(id, company);
 
             if (!result._success)
                 return BadRequest(result._message);
 
-            return Ok(result);
+            var companyResource = _mapper.Map<Company, CompanyResource>(result._company);
+            return Ok(companyResource);
         }
     }
 }

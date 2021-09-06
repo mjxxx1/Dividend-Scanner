@@ -10,7 +10,7 @@ namespace DividendScanner.Domain.Repositories
     {
         Task<IEnumerable<Company>> ListAsync();
         Task AddAsync(Company company);
-        Task<Company> FindCompanyByISINAsync(string isin);
+        Task<Company> FindCompanyByIdAsync(int id);
         void Update(Company company);
     }
 }

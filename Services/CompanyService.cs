@@ -42,15 +42,16 @@ namespace DividendScanner.Services
             return response;
         }
 
-        public async Task<CompanyResponse> UpdateAsync(string isin, Company company)
+        public async Task<CompanyResponse> UpdateAsync(int id, Company company)
         {
-            var currentCompany = await _companyRepository.FindCompanyByISINAsync(isin);
+            var currentCompany = await _companyRepository.FindCompanyByIdAsync(id);
 
             if (currentCompany == null)
-                return new CompanyResponse("Company about given ISIN not exist in database.");
+                return new CompanyResponse("Company about given id does not exist in database.");
 
             currentCompany.Name = company.Name;
             currentCompany.Ticker = company.Ticker;
+            currentCompany.ISIN = company.ISIN;
 
             try
             {

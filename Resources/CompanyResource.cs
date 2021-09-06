@@ -8,6 +8,8 @@ namespace DividendScanner.Resources
 {
     public class CompanyResource
     {
+        public int id { get; set; }
+
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
 
