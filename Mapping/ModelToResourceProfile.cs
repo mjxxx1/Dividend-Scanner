@@ -13,6 +13,7 @@ namespace DividendScanner.Mapping
         public ModelToResourceProfile()
         {
             CreateMap<Company, CompanyResource>();
+            CreateMap<CompanyResource, Company>();
         }
     }
 }

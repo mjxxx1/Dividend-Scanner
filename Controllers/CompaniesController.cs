@@ -35,13 +35,14 @@ namespace DividendScanner.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] Company company)
+        public async Task<IActionResult> PostAsync([FromBody] CompanyResource companyResource)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState.GetErrorMessages());
             }
 
+            var company = _mapper.Map<CompanyResource, Company>(companyResource);
             var result = await _companyService.SaveAsync(company);
 
             if (!result._success)

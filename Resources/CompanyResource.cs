@@ -8,16 +8,16 @@ namespace DividendScanner.Resources
 {
     public class CompanyResource
     {
-        [Required]
+        [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
 
-        [Required]
-        [StringLength(12,
-        ErrorMessage = "ISIN should have 12 alphanumeric characters")]
+        [Required (ErrorMessage = "ISIN is required")]
+        [StringLength(12, ErrorMessage = "ISIN value should have 12 alphanumeric characters")]
+        [MinLength(12, ErrorMessage = "ISIN value should have 12 alphanumeric characters")]
         public string ISIN { get; set; }
 
-        [Required]
-        [MaxLength(4)]
+        [Required(ErrorMessage = "Ticker is required")]
+        [MaxLength(4, ErrorMessage ="Ticker value can not exceed 4 characters")]
         public string Ticker { get; set; }
     }
 }
