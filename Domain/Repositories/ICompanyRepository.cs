@@ -1,4 +1,5 @@
 ﻿using DividendScanner.Domain.Model;
+using DividendScanner.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace DividendScanner.Domain.Repositories
         Task AddAsync(Company company);
         Task<Company> FindCompanyByIdAsync(int id);
         void Update(Company company);
+        Task DeleteAsync(int id);
     }
 }

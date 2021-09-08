@@ -1,4 +1,5 @@
 ﻿using DividendScanner.Domain.Model;
+using DividendScanner.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +9,14 @@ namespace DividendScanner.Domain.Communications
 {
     public class CompanyResponse: BaseResponse
     {
-        public Company _company { get; private set; }
+        public CompanyResource _companyResource { get; private set; }
 
-        public CompanyResponse(bool success, string errorMessage, Company company) : base(success, errorMessage)
+        public CompanyResponse(bool success, string errorMessage, CompanyResource companyResource) : base(success, errorMessage)
         {
-            _company = company;
+            _companyResource = companyResource;
         }
 
-        public CompanyResponse(Company company) : this(true, null, company)
+        public CompanyResponse(CompanyResource companyResource) : this(true, null, companyResource)
         {
         }
 

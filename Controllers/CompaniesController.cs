@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using DividendScanner.Domain.Communications;
 using DividendScanner.Domain.Model;
 using DividendScanner.Domain.Repositories;
 using DividendScanner.Domain.Services;
@@ -27,9 +28,8 @@ namespace DividendScanner.Controllers
         [HttpGet]
         public async Task<IEnumerable<CompanyResource>> GetAllAsync()
         {
-            var companies = await _companyService.ListAsync();
-            var resource = _mapper.Map<IEnumerable<Company>, IEnumerable<CompanyResource>>(companies);
-            return resource;
+            IEnumerable<Company> companies = await _companyService.ListAsync();
+            return _mapper.Map<IEnumerable<Company>, IEnumerable<CompanyResource>>(companies);
         }
 
 
@@ -42,7 +42,7 @@ namespace DividendScanner.Controllers
                 return BadRequest(ModelState.GetErrorMessages());
             }
 
-            var company = _mapper.Map<CompanyResource, Company>(companyResource);
+            Company company = _mapper.Map<CompanyResource, Company>(companyResource);
             var result = await _companyService.SaveAsync(company);
 
             if (!result._success)
@@ -52,20 +52,27 @@ namespace DividendScanner.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(int id, [FromBody] Company company)
+        public async Task<IActionResult> PutAsync(int id, [FromBody] CompanyResource companyResource)
         {
             if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState.GetErrorMessages());
             }
 
+            Company company = _mapper.Map<CompanyResource, Company>(companyResource);
             var result = await _companyService.UpdateAsync(id, company);
 
             if (!result._success)
                 return BadRequest(result._message);
 
-            var companyResource = _mapper.Map<Company, CompanyResource>(result._company);
-            return Ok(companyResource);
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            CompanyResponse response = await _companyService.DeleteAsync(id);
+            return Ok(response);
         }
     }
 }

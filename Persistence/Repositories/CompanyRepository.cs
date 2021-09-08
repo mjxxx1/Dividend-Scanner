@@ -1,7 +1,9 @@
-﻿using DividendScanner.Domain.Model;
+﻿using AutoMapper;
+using DividendScanner.Domain.Model;
 using DividendScanner.Domain.Repositories;
 using DividendScanner.Persistence.Contexts;
 using DividendScanner.Persistence.Repositories;
+using DividendScanner.Resources;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,7 +15,7 @@ namespace DividendScanner.Persistence.Repositories
     public class CompanyRepository : BaseRepository, ICompanyRepository
     {
         public CompanyRepository(AppDbContext dbContext) : base(dbContext)
-        { 
+        {
         }
 
         public async Task AddAsync(Company company)
@@ -35,6 +37,12 @@ namespace DividendScanner.Persistence.Repositories
         public void Update(Company company)
         {
             _appDbContext.Companies.Update(company);
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            Company company = await FindCompanyByIdAsync(id);
+            company.IsDeleted = true;
         }
     }
 }
