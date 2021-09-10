@@ -1,1 +1,0 @@
-https://www.postman.com/mjxxx1/workspace/dividend-scanner-tests/request/17088568-61ad3b52-b1b3-4c9b-a47f-97bdfdec8614
