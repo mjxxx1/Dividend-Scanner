@@ -1,9 +1,3 @@
-[TOC]
-
-------
-
-
-
 1. ### About project
 
    Dividend-Scanner is my non-commercial pet project. It allow user to send requests to 
@@ -35,4 +29,5 @@
 7. ### Contact
 
    Feel free to contact me via private message if you have any question
+   {:toc}
 
