@@ -32,7 +32,8 @@ namespace DividendScanner
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DividendScannerDatabase")));
+            //ConnectionString is defined in appsettings.json
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("somee")));
 
             services.AddMvc();
             services.AddControllers();
@@ -46,7 +47,7 @@ namespace DividendScanner
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
                     Title = "Dividend Scanner API",
-                    Description = "API for retrieve and manipulate data about dividend stocks",
+                    Description = "API for retrieve and manipulate dividend stocks data",
                 });
                 });
         }
