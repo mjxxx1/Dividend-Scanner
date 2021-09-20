@@ -27,7 +27,7 @@
 
    Tests are written with Postman.\
    Collection with tests is available to watch on:\
-   www.postman.com/mjxxx1/workspace/dividend-scanner-tests \
+   www.postman.com/mjxxx1/workspace/dividend-scanner-tests 
    
 ![Postman testy 1](https://user-images.githubusercontent.com/50848713/133991617-976702dd-6482-40e6-8a99-6cc09ae1ff54.png)
 
