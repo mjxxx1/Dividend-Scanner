@@ -25,13 +25,15 @@
 
 4. ### Automated tests
 
-   Tests are written with Postman.
-   Collection with tests is available to watch on:
-   www.postman.com/mjxxx1/workspace/dividend-scanner-tests
+   Tests are written with Postman.\
+   Collection with tests is available to watch on:\
+   www.postman.com/mjxxx1/workspace/dividend-scanner-tests \
    
-   ![Postman testy 1](C:\Users\Mariusz\Desktop\Postman testy\Postman testy 1.png)
-   
-   ![Postman testy 2](C:\Users\Mariusz\Desktop\Postman testy\Postman testy 2.png)
+![Postman testy 1](https://user-images.githubusercontent.com/50848713/133991617-976702dd-6482-40e6-8a99-6cc09ae1ff54.png)
+
+![Postman testy 2](https://user-images.githubusercontent.com/50848713/133991639-c551c2a6-d4c5-41f2-b677-a4c6410d7ea4.png)
+
+
 
 5. ### Architecture of project
 
