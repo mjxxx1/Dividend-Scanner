@@ -1,7 +1,10 @@
-[About project](http://github.com/mjxxx1/Dividend-Scanner/blob/master/README.md#about-project)
-[Technologies](http://github.com/mjxxx1/Dividend-Scanner/blob/master/README.md#technologies)
-[Endpoints overview](http://github.com/mjxxx1/Dividend-Scanner/blob/master/README.md#endpoints-overview)
-[Endpoints overview](http://github.com/mjxxx1/Dividend-Scanner/blob/master/README.md#contact)
+[About project](http://github.com/mjxxx1/Dividend-Scanner/blob/master/README.md#about-project)\
+[Technologies](http://github.com/mjxxx1/Dividend-Scanner/blob/master/README.md#technologies)\
+[Endpoints overview](http://github.com/mjxxx1/Dividend-Scanner/blob/master/README.md#endpoints-overview)\
+[Automated tests](http://github.com/mjxxx1/Dividend-Scanner/blob/master/README.md#automated-tests)\
+[Architecture of project](http://github.com/mjxxx1/Dividend-Scanner/blob/master/README.md#architecture-of-project)\
+[Licence](http://github.com/mjxxx1/Dividend-Scanner/blob/master/README.md#licence)\
+[Contact](http://github.com/mjxxx1/Dividend-Scanner/blob/master/README.md#contact)\
 
 1. ### About project
 
