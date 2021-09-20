@@ -5,7 +5,7 @@
 
 1. ### About project
 
-   Dividend-Scanner is my non-commercial pet project. It allow user to send requests to 
+   Dividend-Scanner is my non-commercial pet project. It allow user to send requests to server in order to retrieve data which would help in taking a investments decisions. 
 
 2. ### Technologies
 
@@ -22,6 +22,9 @@
    Dependency Injection
 
 3. ### Endpoints overview
+
+	Necessary informations about endpoints are available on:\
+	http://www.dividend-scanner.somee.com/swagger/index.html
 
 4. ### Automated tests
 
