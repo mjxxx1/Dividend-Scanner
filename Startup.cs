@@ -16,6 +16,7 @@ using DividendScanner.Domain.Repositories;
 using DividendScanner.Persistence.Repositories;
 using DividendScanner.Services;
 using DividendScanner.Domain.Services;
+using Microsoft.Extensions.Options;
 
 namespace DividendScanner
 {
@@ -32,7 +33,7 @@ namespace DividendScanner
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DividendScannerDatabase")));
-            
+
             services.AddMvc();
             services.AddControllers();
 
@@ -41,8 +42,14 @@ namespace DividendScanner
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddAutoMapper(typeof(Startup));
+            services.AddSwaggerGen(options => {
+                options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "Dividend Scanner API",
+                    Description = "API for retrieve and manipulate data about dividend stocks",
+                });
+                });
         }
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -60,6 +67,13 @@ namespace DividendScanner
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(options => 
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger API");
             });
         }
     }
