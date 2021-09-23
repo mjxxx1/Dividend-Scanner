@@ -26,7 +26,7 @@ namespace DividendScanner.Persistence.Repositories
 
         public async Task<IEnumerable<Company>> ListAsync()
         {
-            return await _appDbContext.Companies.Where(x => x.IsDeleted == false).ToListAsync();
+            return await _appDbContext.Companies.Where(x => x.IsDeleted == false).Include(p => p.Sector).ToListAsync();
         }
 
         public async Task<Company> FindCompanyByIdAsync(int id)
