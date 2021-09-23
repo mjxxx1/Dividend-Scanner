@@ -33,13 +33,15 @@ namespace DividendScanner
         public void ConfigureServices(IServiceCollection services)
         {
             //ConnectionString is defined in appsettings.json
-            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("somee")));
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("localTestDB")));
 
             services.AddMvc();
             services.AddControllers();
 
             services.AddScoped<ICompanyRepository, CompanyRepository>();
             services.AddScoped<ICompanyService, CompanyService>();
+            services.AddScoped<ISectorRepository, SectorRepository>();
+            services.AddScoped<ISectorService, SectorService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddAutoMapper(typeof(Startup));

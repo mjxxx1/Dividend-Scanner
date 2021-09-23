@@ -21,7 +21,8 @@ namespace DividendScanner.Domain.Model
         public bool IsDeleted { get; set; }
 
 
-
-       // ErrorMessage = "ISIN is required and should be minimum 3 characters and a maximum of 4 characters")]
+        //defining relation with Sector table - company has only one sector, sector can have many companies
+        public int? SectorID { get; set; } //when sector is deleted, SectorID will be set to null
+        public Sector Sector { get; set; }
     }
 }

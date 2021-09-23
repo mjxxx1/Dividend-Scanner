@@ -14,6 +14,8 @@ namespace DividendScanner.Mapping
         {
             CreateMap<Company, CompanyResource>();
             CreateMap<CompanyResource, Company>();
+            CreateMap<Sector, SectorResource>();
+            CreateMap<SectorResource, Sector>();
         }
     }
 }

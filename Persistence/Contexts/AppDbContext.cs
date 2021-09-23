@@ -12,10 +12,11 @@ namespace DividendScanner.Persistence.Contexts
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<Company> Companies { get; set; }
+        public DbSet<Sector> Sectors { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Property Configurations
+            //Company properties configuration
             modelBuilder.Entity<Company>()
                     .HasKey(x => x.ID);
 
@@ -38,6 +39,18 @@ namespace DividendScanner.Persistence.Contexts
                     .Property(x => x.IsDeleted)
                     .HasDefaultValue(false);
 
+
+            //Sector properties configuration
+            modelBuilder.Entity<Sector>()
+                    .HasKey(x => x.ID);
+
+            modelBuilder.Entity<Sector>()
+                    .Property(x => x.Name)
+                    .IsRequired();
+
+            modelBuilder.Entity<Sector>()
+                    .Property(x => x.IsDeleted)
+                    .HasDefaultValue(false);
         }
     }
 }
