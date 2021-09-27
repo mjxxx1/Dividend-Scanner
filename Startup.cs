@@ -42,6 +42,7 @@ namespace DividendScanner
             services.AddScoped<ICompanyService, CompanyService>();
             services.AddScoped<ISectorRepository, SectorRepository>();
             services.AddScoped<ISectorService, SectorService>();
+            services.AddScoped<ISectorForCompanyServiceRepository, SectorRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddAutoMapper(typeof(Startup));

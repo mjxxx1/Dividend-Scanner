@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace DividendScanner.Persistence.Repositories
 {
-    public class SectorRepository : BaseRepository, ISectorRepository
+    public class SectorRepository : BaseRepository, ISectorRepository, ISectorForCompanyServiceRepository
     {
         public SectorRepository(AppDbContext dbContext) : base(dbContext)
         {
@@ -29,11 +29,6 @@ namespace DividendScanner.Persistence.Repositories
             return await _appDbContext.Sectors.Where(x => x.IsDeleted == false).ToListAsync();
         }
 
-        public async Task<Sector> FindSectorByIdAsync(int id)
-        {
-            return await _appDbContext.Sectors.FindAsync(id);
-        }
-
         public void Update(Sector sector)
         {
             _appDbContext.Sectors.Update(sector);
@@ -43,6 +38,17 @@ namespace DividendScanner.Persistence.Repositories
         {
             Sector sector = await FindSectorByIdAsync(id);
             sector.IsDeleted = true;
+        }
+
+        public async Task<Sector> FindSectorByIdAsync(int id)
+        {
+            return await _appDbContext.Sectors.FindAsync(id);
+        }
+
+        public async Task<Sector> FindSectorByNameAsync(string name)
+        {
+            //return await _appDbContext.Sectors.FindAsync(name);
+            return await _appDbContext.Sectors.FirstOrDefaultAsync(x => x.Name == name);
         }
     }
 }

@@ -21,7 +21,6 @@ namespace DividendScanner.Resources
         [Required(ErrorMessage = "Ticker is required")]
         [MaxLength(4, ErrorMessage ="Ticker value can not exceed 4 characters")]
         public string Ticker { get; set; }
-
         public string Sector { get; set; }
     }
 }

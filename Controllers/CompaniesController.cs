@@ -32,8 +32,6 @@ namespace DividendScanner.Controllers
             return _mapper.Map<IEnumerable<Company>, IEnumerable<CompanyResource>>(companies);
         }
 
-
-
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] CompanyResource companyResource)
         {
@@ -42,8 +40,9 @@ namespace DividendScanner.Controllers
                 return BadRequest(ModelState.GetErrorMessages());
             }
 
+            string sector = companyResource.Sector ?? null;
             Company company = _mapper.Map<CompanyResource, Company>(companyResource);
-            var result = await _companyService.SaveAsync(company);
+            var result = await _companyService.SaveAsync(company, sector);
 
             if (!result._success)
                 return BadRequest(result._message);

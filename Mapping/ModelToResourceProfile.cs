@@ -12,9 +12,12 @@ namespace DividendScanner.Mapping
     {
         public ModelToResourceProfile()
         {
-            CreateMap<Company, CompanyResource>()
-                .ForMember(dest => dest.Sector, opt => opt.MapFrom(src => src.Sector.Name));
-            CreateMap<CompanyResource, Company>();
+            CreateMap<Company, CompanyResource>();
+            CreateMap<CompanyResource, Company>()
+                 .ForMember(dest => dest.ISIN, opt => opt.MapFrom(src => src.ISIN))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.Ticker, opt => opt.MapFrom(src => src.Ticker))
+                .ForAllOtherMembers(x => x.Ignore());
             CreateMap<Sector, SectorResource>();
             CreateMap<SectorResource, Sector>();
         }

@@ -14,11 +14,13 @@ namespace DividendScanner.Services
     public class CompanyService : ICompanyService
     {
         private readonly ICompanyRepository _companyRepository;
+        private readonly ISectorForCompanyServiceRepository _sectorForCompanyServiceRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public CompanyService(ICompanyRepository companyRepository, IUnitOfWork unitOfWork, IMapper mapper)
+        public CompanyService(ICompanyRepository companyRepository, ISectorForCompanyServiceRepository sectorForCompanyServiceRepository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _companyRepository = companyRepository;
+            _sectorForCompanyServiceRepository = sectorForCompanyServiceRepository;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
@@ -28,14 +30,30 @@ namespace DividendScanner.Services
             return await _companyRepository.ListAsync();
         }
 
-        public async Task<CompanyResponse> SaveAsync(Company company)
+        public async Task<CompanyResponse> SaveAsync(Company company, string sectorName)
         {
+            Sector sector;
+            if (sectorName != null)
+            {
+                try
+                {
+                    sector = await _sectorForCompanyServiceRepository.FindSectorByNameAsync(sectorName);
+                    company.Sector = sector;
+                }
+                catch (Exception ex)
+                {
+                    return new CompanyResponse("Given sector does not exist in database. Make sure that you typed correct sector. If you want to add company with new sector, add sector firstly.");
+                }
+            }
+
             CompanyResponse response;
             try
             {
                 await _companyRepository.AddAsync(company);
                 await _unitOfWork.CompleteAsync();
                 CompanyResource companyResource = _mapper.Map<Company, CompanyResource>(company);
+                Sector sc = await _sectorForCompanyServiceRepository.FindSectorByNameAsync(sectorName);
+                companyResource.Sector = sc?.Name;
                 response = new CompanyResponse(companyResource);
             }
             catch(Exception ex)
